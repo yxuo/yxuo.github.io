@@ -57,7 +57,7 @@
 
         'api/default': () => sendResponse({
             info: "Yxuo page API",
-            args: Object.keys(controller),
+            args: Object.keys(controller).filter(i => i.startsWith('api')),
         }),
 
         'api/v1/notion-utils/about': () => location.assign(
