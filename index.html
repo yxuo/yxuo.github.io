@@ -37,11 +37,11 @@
             + JSON.stringify(jsonData, null, 2)
             + '</pre>';
     }
-
     const getObjValue = (obj, key, defVal = 'default') => obj[key] || obj[defVal];
     const getArgsUri = (prefix, offset, qArgs = 'p', defVal = 'default') =>
         [prefix, (args.get(qArgs) || '').split('/').slice(offset).join('/') || defVal]
             .join('/');
+
     const args = new URLSearchParams(window.location.search);
 
     const controller = {
@@ -61,13 +61,13 @@
         }),
 
         'api/v1/notion-utils/about': () => location.assign(
-            "https://www.google.com"
+            "https://yxuo.notion.site/2a5c830cdaf14f65b3e2304fca6b03e1"
         ),
         'api/v1/notion-utils/feedback': () => location.assign(
-            "https://www.google.com"
+            "https://yxuo.notion.site/2a5c830cdaf14f65b3e2304fca6b03e1"
         ),
         'api/v1/notion-utils/privacy': () => location.assign(
-            "https://www.google.com"
+            "https://yxuo.notion.site/2a5c830cdaf14f65b3e2304fca6b03e1"
         ),
 
     };
@@ -75,14 +75,9 @@
     function main() {
         const key = args.get('p');
         getObjValue(controller, (args.get('p') || '').split('/')[0])();
-        // controller[]();
     }
     main();
 
-
-    // location.assign(
-    //     "https://yxuo.notion.site/2a5c830cdaf14f65b3e2304fca6b03e1"
-    // );
 </script>
 
 </html>
