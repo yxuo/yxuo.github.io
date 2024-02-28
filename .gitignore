@@ -1,1 +1,4 @@
-local_dev
+local_dev/
+node_modules/
+dist/
+.cache/
