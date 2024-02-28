@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            background-color: rgb(240, 240, 240);
+            color: black;
+            margin: 0px;
+        }
+
+        pre {
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+            overflow: hidden;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        @media screen and (prefers-color-scheme: dark) {
+            * {
+                background-color: rgb(20, 20, 20);
+                color: white;
+            }
+        }
+    </style>
+</head>
+
+<body></body>
+
+<script>
+    function sendResponse(jsonData) {
+        document.body.innerHTML = '<pre>'
+            + JSON.stringify(jsonData, null, 2)
+            + '</pre>';
+    }
+    const getObjValue = (obj, key, defVal = 'default') => obj[key] || obj[defVal];
+    const getArgsUri = (prefix, offset, qArgs = 'p', defVal = 'default') =>
+        [prefix, (args.get(qArgs) || '').split('/').slice(offset).join('/') || defVal]
+            .join('/');
+
+    const args = new URLSearchParams(window.location.search);
+
+    const controller = {
+        default: () => sendResponse({
+            info: "TEST PAGE",
+            args: Object.keys(controller),
+        }),
+
+        api: () => {
+            console.log(getArgsUri('api', 1))
+            getObjValue(controller, getArgsUri('api', 1), 'api/default')();
+        },
+
+        'api/default': () => sendResponse({
+            info: "Yxuo page API",
+            args: Object.keys(controller).filter(i => i.startsWith('api')),
+        }),
+
+        'api/v1/notion-utils/about': () => location.assign(
+            "https://yxuo.notion.site/2a5c830cdaf14f65b3e2304fca6b03e1"
+        ),
+        'api/v1/notion-utils/feedback': () => location.assign(
+            "https://yxuo.notion.site/2a5c830cdaf14f65b3e2304fca6b03e1"
+        ),
+        'api/v1/notion-utils/privacy': () => location.assign(
+            "https://yxuo.notion.site/2a5c830cdaf14f65b3e2304fca6b03e1"
+        ),
+
+    };
+
+    function main() {
+        const key = args.get('p');
+        getObjValue(controller, (args.get('p') || '').split('/')[0])();
+    }
+    main();
+
+</script>
+
+</html>
